@@ -1,0 +1,92 @@
+{% extends "layouts/base.html" %} 
+{% load crispy_forms_tags %}
+
+{% block navigation %}
+<div class="nk-content-body">
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between py-3 px-3 bg-light rounded-3">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title">{{mail_list.name}}</h3>
+                <div class="nk-block-des text-soft">
+                    <p>Details</p>
+                </div>
+            </div><!-- .nk-block-head-content -->
+            <!-- .nk-block-head-content -->
+            
+            <div class="nk-block-head-content">
+                <div class="toggle-wrap nk-block-tools-toggle">
+                    <div class="toggle-expand-content" data-content="pageMenu">  
+                        <ul class="nk-block-tools g-3">
+                            <li class="nk-block-tools-opt"><a href="{%url 'mail-list' %}" class="btn btn-white btn-dim btn-outline-light"><em class="icon ni ni-curve-down-left"></em><span>Back</span></a></li>
+                            <li class="nk-block-tools-opt"><a href="{%url 'add-recipient' mail_list_id=mail_list.id %}" class="btn btn-white btn-dim btn-outline-light"><em class="icon ni ni-plus"></em><span>Add Recipient</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- .nk-block-head-content -->
+        </div><!-- .nk-block-between -->
+    </div><!-- .nk-block-head -->
+{% endblock%}
+
+{% block content%}
+
+<div class="nk-block nk-block-lg">
+    <div class="card card-bordered">
+        <div class="card-inner">
+            <div class="card-head">
+                <h5 class="card-title">Mail List Information</h5>
+            </div>
+            <ul class="nav nav-tabs mt-n3">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#tabItem5"><em class="icon ni ni-eye-alt"></em><span>Description</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " data-bs-toggle="tab" href="#tabItem6"><em class="icon ni ni-calendar"></em><span>Recipients</span></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabItem5">
+                    <div class="d-flex align-center justify-content-between py-1">
+                        <span class="text-muted">Name</span>
+                        <span class="text-muted">{{mail_list.name}}</span>
+                    </div>
+                    <hr / class="bg-light">
+                    <div class="d-flex align-center justify-content-between py-1">
+                        <span class="text-muted">Description</span>
+                        <span class="text-muted">{{mail_list.description}}</span>
+                    </div>
+                 </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane " id="tabItem6">                
+                    <table class="datatable-init-export nowrap table" data-export-title="Export">
+                        <thead>
+                            <tr>
+                                <th>Name</th> 
+                                <th>Email</th>                          
+                                <th>Action</th>                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for recipient in recipients %}
+                        <tr>
+                            <td>{{ recipient.name}}</a></td>
+                            <td >{{ recipient.email }}</td>
+                            <td>
+                                <div class="btn-group" aria-label="Basic example" style="display: inline-block;">
+                                    <a class="btn btn-outline-success ml-3" href="{% url 'update-recipient' recipient_id=recipient.id %}"style="margin-right: 10px;">Update</a>
+                                    <a class="btn btn-outline-danger mr-3" href="{% url 'remove-recipient' recipient_id=recipient.id %}">Remove</a>
+                                  </div>
+                            </td>                                                            
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div><!-- .nk-block -->
+
+
+
+{% endblock %}

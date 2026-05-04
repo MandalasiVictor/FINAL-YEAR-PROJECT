@@ -1,0 +1,209 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block navigation %}
+
+{% endblock %}
+
+{% block content %}
+<div class="nk-block-head nk-block-head-lg wide-sm mx-auto">
+    <div class="nk-block-head-content text-center">
+        <h2 class="nk-block-title fw-normal">User Input &amp; Model Output</h2>
+        <div class="nk-block-des">
+            <p class="lead"> Here is detailed information about user input and out put results predicted by the model to get ahead of this ever changing demand across Channels</p>
+            <p class="text-soft ff-italic">Last Update: {% now "F j, Y" %}</p>
+        </div>
+    </div>
+</div><!-- .nk-block-head -->
+<div class="nk-block">
+    <div class="card card-bordered">
+        <div class="card-inner card-inner-xl">
+            <div class="entry">
+                <div class="nk-block">
+                    <div class="row gy-gs">
+                        <div class="col-12 col-xxl-8">
+                            <div class="card-inner p-0 card-bordered h-100">
+                                <div class="card-inner border-bottom">
+                                    <div class="card-title-group">
+                                        <div class="card-title">
+                                            <h6 class="title">User Input</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-inner p-0">
+                                    <table class="table table-tranx">
+                                        <thead>
+                                            <tr class="tb-tnx-head">
+                                                <th class="tb-tnx-id"><span class="">Total Budget</span></th>
+                                                <th class="tb-tnx-id"><span class="">Campaign Type</span></th>
+                                                <th class="tb-tnx-id"><span class="">Target Audience</span></th>
+                                                <th class="tb-tnx-id"><span class="">Seasonality</span></th>
+                                                <th class="tb-tnx-id"><span class="">Preferred Channels</span></th>
+                                                <th class="tb-tnx-id"><span class="">Primary Interest</span></th>
+                                            </tr><!-- tb-tnx-item -->
+                                        </thead>
+                                        <tbody>
+                                            <tr class="tb-tnx-item">
+                                                <td class="tb-tnx-id">
+                                                    <a ><span>${{ user_input.total_budget }}</span></a>
+                                                </td>
+                                                <td class="tb-tnx-info">
+                                                    <div class="">
+                                                        <span class="text-center">{{ user_input.campaign_type }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="tb-tnx-info">
+                                                    <div class="">
+                                                        <span class="text-center">{{ user_input.target_audience }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="tb-tnx-info">
+                                                    <div class="">
+                                                        <span class="text-center">{{ user_input.seasonality }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="tb-tnx-info">
+                                                    <div class="">
+                                                        <span class="text-center">{{ user_input.preferred_channels }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="tb-tnx-info">
+                                                    <div class="">
+                                                        <span class="text-center">{{ user_input.primary_interest }}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>                            
+                <div class="nk-content nk-content-fluid">
+                    <div class="container-xl wide-lg">
+                        <div class="nk-content-body">
+                            <div class="nk-block-head">
+                                <div class="nk-block-between-md g-4">
+                                    <div class="nk-block-head-content">
+                                        <h2 class="nk-block-title fw-normal">Prediction Results</h2>
+                                        <div class="nk-block-des">
+                                            <p>Here is the list of the objectives 1<span><em class="icon ni ni-arrow-long-right"></em></span> 4</p></p>
+                                        </div>
+                                    </div>
+                                </div><!-- .nk-block-between -->
+                            </div><!-- .nk-block-head -->
+                            <div class="nk-block">
+                                <div class="row g-gs">
+                                    <div class="col-sm-6 col-xxl-4">
+                                        <div class="card card-bordered featured-card h-100">
+                                            <div class="card-inner">
+                                                <h4 class="card-title mt-2">Objective 1</h4>
+                                                <br>
+                                                <table class="table">
+                                                    <thead class="table-primary ">
+                                                            <tr>
+                                                                <th>Expected Leads</th>
+                                                                <th>Return On Investment (ROI) </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>{{ model_output.expected_leads }}</th>
+                                                                <th>{{ model_output.estimated_revenue }}</th>
+                                                            </tr>
+                                                        
+                                                        </tbody>
+                                                    </table>
+                                            
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    <div class="col-sm-6 col-xxl-4">
+                                        <div class="card card-bordered featured-card h-100">
+                                            <div class="card-inner">                             
+                                                <h4 class="card-title mt-2">Objective 2</h4>
+                                                <table class="table">
+                                                    <thead class="table-primary ">
+                                                            <tr>
+                                                                <th>Channel</th>
+                                                                <th>Optimal Budget Allocation</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for channel, allocation in optimal_budget_allocation %}
+                                                            <tr>
+                                                                <td>{{ channel }}</td>
+                                                                <td>{{ allocation }}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    <div class="col-sm-6 col-xxl-4">
+                                        <div class="card card-bordered featured-card h-100">
+                                            <div class="card-inner">
+                                                <h4 class="card-title mt-2">Objective 3</h4>
+                                                <div class="text-center mb-10"><h5>Most Suitable Marketing Channel</h5>
+                                                
+                                                    {% for channel, most_effective in most_effective_channel.items %}
+                                                        {% if channel == "Facebook" %}
+                                                            <img src="{% static 'images/icons8-facebook-48.png' %}" alt="Facebook" class="img-fluid" style="max-width: 100px; height: 100px;" />
+                                                        {% elif most_effective == "Twitter" %}
+                                                            <img src="{% static 'images/icons8-x-50.png' %}" alt="Twitter" class="img-fluid" style="max-width: 100px; height: 100px;" />
+                                                        {% elif most_effective == "WhatsApp" %}
+                                                            <img src="{% static 'images/icons8-whatsapp-48.png' %}" alt="WhatsApp" class="img-fluid" style="max-width: 100px; height: 100px;" />
+                                                        {% elif most_effective == "LinkedIn" %}
+                                                            <img src="{% static 'images/icons8-linkedin-48.png' %}" alt="LinkedIn" class="img-fluid" style="max-width: 100px; height: 100px;" />
+                                                        {% else %}
+                                                            <p>N/A</p>  
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    <div class="col-sm-6 col-xxl-4">
+                                        <div class="card card-bordered featured-card h-100">
+                                            <div class="card-inner">
+                                                <h4 class="card-title mt-2">Objective 4</h4>
+                                                <table class="table">
+                                                    <thead class="table-primary ">
+                                                            <tr>
+                                                                <th>Channel</th>
+                                                                <th>Effectiveness Score</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for channel, effectiveness in channel_effectiveness %}
+                                                            <tr>
+                                                                <td>{{ channel }}</td>
+                                                                <td>{{ effectiveness }}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                </div><!-- .row -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <br>
+            <a href="{% url 'prediction' %}" class="btn btn btn-primary"><em class="icon ni ni-arrow-left"></em><span>Back to Form</span></a>
+        </div><!-- .card-inner -->
+    </div><!-- .card -->
+</div><!-- .nk-block -->
+
+
+
+{% endblock %}
+

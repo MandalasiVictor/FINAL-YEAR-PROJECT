@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+    <base href="../">
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="django starter kit.">
+    <!-- Fav Icon  -->
+    <!-- <link rel="shortcut icon" href="{% static 'images/logo.svg' %}" style="border-radius: 70%;"> -->
+    <link rel="shortcut icon" href="{% static 'images/viclogo.png' %}" style="border-radius: 50%;">
+    <!-- Page Title  -->
+    <title>Optimizing Marketing Channels</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="{% static 'assets/css/dashlite.css' %}?ver=3.1.1">
+    <link id="skin-default" rel="stylesheet" href="{% static 'assets/css/theme.css?' %}?ver=3.1.1'">
+    <link id="skin-default" rel="stylesheet" href="{% static 'scss/libs/fontawesome-icons.scss' %}'">
+  
+    
+
+</head>
+
+<body class="nk-body bg-white has-sidebar ">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- sidebar @s -->
+
+            {% include 'layouts/sidebar.html' %}
+
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- main header @s -->
+
+                {% include 'layouts/header.html' %}
+
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content nk-content-fluid">
+                    {% include 'layouts/messages.html' %}
+                    <div class="container-xl wide-lg">
+                        <div class="nk-content-body">
+                            {% block navigation %}
+
+
+
+                            {% endblock%}
+
+                            {% block content %}
+
+
+                            {% endblock%}
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+                <!-- footer @s -->
+                {% include 'layouts/footer.html' %}
+                <!-- footer @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+
+    <!-- JavaScript -->
+    {% include 'layouts/scripts.html' %}
+
+</body>
+
+</html>

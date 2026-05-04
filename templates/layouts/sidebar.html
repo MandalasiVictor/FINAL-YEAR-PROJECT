@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="nk-sidebar nk-sidebar-fixed" data-content="sidebarMenu">
+  <div class="nk-sidebar-element nk-sidebar-head">
+    <div class="nk-sidebar-brand">
+      <a href="html/index.html" class="logo-link nk-sidebar-logo">
+        <h4>Auth</h4>
+      </a>
+    </div>
+    <div class="nk-menu-trigger me-n2">
+      <a
+        href="#"
+        class="nk-nav-toggle nk-quick-nav-icon d-xl-none"
+        data-target="sidebarMenu"
+        ><em class="icon ni ni-arrow-left"></em
+      ></a>
+    </div>
+  </div>
+  <!-- .nk-sidebar-element -->
+  <div class="nk-sidebar-element">
+    <div class="nk-sidebar-body" data-simplebar>
+      <div class="nk-sidebar-content">
+        <div class="nk-sidebar-menu">
+          <ul class="nk-menu">
+            <li class="nk-menu-item">
+              <a href="{%url 'dashboard' %}" class="nk-menu-link">
+                <span class="nk-menu-icon"
+                  ><em class="icon ni ni-growth"></em
+                ></span>
+                <span class="nk-menu-text">Home</span>
+              </a>
+            </li>
+            <!-- .nk-menu-item -->
+            
+            <li class="nk-menu-item">
+              <a href="{% url 'prediction' %}" class="nk-menu-link">
+                <span class="nk-menu-icon"> <em class="icon ni ni-swap"></em></span>
+                <span class="nk-menu-text">Smart Budgets</span>
+              </a>
+            </li>
+            
+            <li class="nk-menu-item">
+              <a href="{% url 'users-index' %}" class="nk-menu-link">
+                <span class="nk-menu-icon"
+                  ><em class="icon ni ni-user-list"></em
+                ></span>
+                <span class="nk-menu-text">System Users</span>
+              </a>
+            </li>
+            
+          </ul>
+          <!-- .nk-menu -->
+        </div>
+        <!-- .nk-sidebar-menu -->
+      </div>
+      <!-- .nk-sidebar-content -->
+    </div>
+    <!-- .nk-sidebar-body -->
+  </div>
+  <!-- .nk-sidebar-element -->
+</div>

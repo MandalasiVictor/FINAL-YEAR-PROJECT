@@ -1,0 +1,132 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block navigation %}
+<div class="nk-content-body">
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between py-3 px-3 bg-light rounded-3">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title">Marketing Prediction Form</h3>
+                <div class="nk-block-des text-soft">
+               
+                </div>
+            </div><!-- .nk-block-head-content -->
+            <!-- <ul class="nk-block-tools g-3">
+                <form>
+                    <input type="month" id="year" name="year" class="form-control form-control-outlined" value="{% if request.GET.year %}{{ request.GET.year }}{% else %}{{ current_year }}{% endif %}">
+                    <input type="submit" value="Filter" class="btn btn-white btn-dim btn-outline-light mx-1">
+                </form>
+                .nk-block-head -->
+</div>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="card card-bordered card-preview">
+        <div class="card-inner">
+            <div class="preview-block">
+                <span class="preview-title-lg overline-title">Fill In The Form</span>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row gy-4">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label" for="total_budget">Total Budget</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-text-hint">
+                                        <span class="overline-title">USD</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="total_budget" name="total_budget" placeholder="Amount placeholder" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label" for="campaign_type">Campaign Type</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-control-select">
+                                        <select class="form-control" id="campaign_type" name="campaign_type" required>
+                                            <option value="Brand Awareness">Brand Awareness</option>
+                                            <option value="Engagement Campaign">Engagement Campaign</option>
+                                            <option value="Promotional Offer">Promotional Offer</option>
+                                            <option value="B2B Outreach">B2B Outreach</option>
+                                            <option value="New Product Launch">New Product Launch</option>
+                                            <option value="Seasonal Sale">Seasonal Sale</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label" for="target_audience">Target Audience</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-control-select">
+                                        <select class="form-control" id="target_audience" name="target_audience" required>
+                                            <option value="18–29">18–29</option>
+                                            <option value="18–34">18–34</option>
+                                            <option value="25–45">25–45</option>
+                                            <option value="30–50">30–50</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label" for="seasonality">Seasonality</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-control-select">
+                                        <select class="form-control" id="seasonality" name="seasonality" required>
+                                            <option value="Holiday">Holiday</option>
+                                            <option value="Non-Holiday">Non-Holiday</option>
+                                            <option value="Peak Season">Peak Season</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label" for="primary_interest">Primary Interest</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-control-select">
+                                        <select class="form-control" id="primary_interest" name="primary_interest" required>                                     
+                                            <option value="Tech">Tech</option>
+                                            <option value="Fashion">Fashion</option>
+                                            <option value="News">News</option>
+                                            <option value="Lifestyle">Lifestyle</option>
+                                            <option value="Deals">Deals</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Professional">Professional</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-label" for="preferred_channels">Preferred Channels</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-control-select-multiple">
+                                        <select class="form-select" id="preferred_channels" name="preferred_channels" multiple aria-label="multiple select example">
+                                            <option value="Facebook">Facebook</option>
+                                            <option value="Twitter">Twitter</option>
+                                            <option value="WhatsApp">WhatsApp</option>
+                                            <option value="LinkedIn">LinkedIn</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-wider btn-primary"><span>Submit</span><em class="icon ni ni-arrow-right"></em></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block navigation %}
+<div class="nk-content-body">
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between py-3 px-3 bg-light rounded-3">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title">Dashboard</h3>
+                <div class="nk-block-des text-soft">
+                    <!-- Optional description can go here -->
+                </div>
+            </div><!-- .nk-block-head-content -->
+            <div class="nk-block-tools g-3">
+                <form method="GET" action="{% url 'dashboard' %}">
+                    <label for="time_filter">Select Time Period:</label>
+                    <select name="time_filter" id="time_filter" class="form-control form-control-outlined">
+                        <option value="day">Last Day</option>
+                        <option value="week">Last Week</option>
+                        <option value="month">Last Month</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                    <button type="submit" class="btn btn-white btn-dim btn-outline-light mx-1">Filter</button>
+                </form>
+            </div><!-- .nk-block-tools -->
+        </div>
+    </div>
+{% endblock %}
+    
+{% block content %}
+<br>
+<h3>Expected Leads Chart</h3>
+<canvas id="expectedLeadsChart"></canvas> <!-- Canvas for Expected Leads Chart -->
+<br>
+<h3>Estimated Revenue Chart</h3>
+<canvas id="estimatedRevenueChart"></canvas> <!-- Canvas for Estimated Revenue Chart -->
+<br>
+<h3>Optimal Budget Allocation Chart</h3>
+<canvas id="optimalBudgetAllocationChart"></canvas> <!-- Canvas for Optimal Budget Allocation Chart -->
+<br>
+<h3>Channel Effectiveness Chart</h3>
+<canvas id="channelEffectivenessChart"></canvas> <!-- Canvas for Channel Effectiveness Chart -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+
+<script>
+    // Prepare data for expected leads chart
+    const expectedLeadsData = {{ expected_leads_data|safe }};
+    
+    const expectedLeadsConfig = {
+        type: 'bar',
+        data: expectedLeadsData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    };
+
+    // Create the expected leads chart
+    const ctxExpectedLeads = document.getElementById('expectedLeadsChart').getContext('2d');
+    const expectedLeadsChart = new Chart(ctxExpectedLeads, expectedLeadsConfig);
+
+    // Prepare data for estimated revenue chart
+    const estimatedRevenueData = {{ estimated_revenue_data|safe }};
+    
+    const estimatedRevenueConfig = {
+        type: 'bar',
+        data: estimatedRevenueData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    };
+
+    // Create the estimated revenue chart
+    const ctxEstimatedRevenue = document.getElementById('estimatedRevenueChart').getContext('2d');
+    const estimatedRevenueChart = new Chart(ctxEstimatedRevenue, estimatedRevenueConfig);
+
+    // Prepare data for optimal budget allocation chart
+    const optimalBudgetAllocationData = {{ optimal_budget_allocation_data|safe }};
+    
+    const optimalBudgetAllocationConfig = {
+        type: 'bar',
+        data: optimalBudgetAllocationData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    };
+
+    // Create the optimal budget allocation chart
+    const ctxOptimalBudgetAllocation = document.getElementById('optimalBudgetAllocationChart').getContext('2d');
+    const optimalBudgetAllocationChart = new Chart(ctxOptimalBudgetAllocation, optimalBudgetAllocationConfig);
+
+    // Prepare data for channel effectiveness chart
+    const channelEffectivenessData = {{ channel_effectiveness_data|safe }};
+    
+    const channelEffectivenessConfig = {
+        type: 'pie',
+        data: channelEffectivenessData,
+        options: {
+            responsive: true
+        }
+    };
+
+    // Create the channel effectiveness chart
+    const ctxChannelEffectiveness = document.getElementById('channelEffectivenessChart').getContext('2d');
+    const channelEffectivenessChart = new Chart(ctxChannelEffectiveness, channelEffectivenessConfig);
+</script>
+{% endblock %}                  

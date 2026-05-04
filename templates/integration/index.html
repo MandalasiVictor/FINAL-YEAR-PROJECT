@@ -1,0 +1,122 @@
+{% extends 'layouts/base.html' %}
+{% load static%}
+
+{% block navigation %}
+<div class="nk-content-body">
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between py-3 px-3 bg-gray-300 rounded-3">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title">Integrations</h3>
+                <div class="nk-block-des text-soft">
+                    <p>Data Integrations</p>
+                </div>
+            </div><!-- .nk-block-head-content -->
+            <!-- .nk-block-head-content -->
+            <div class="nk-block-head-content">
+                <div class="toggle-wrap nk-block-tools-toggle">
+                    <div class="toggle-expand-content" data-content="pageMenu">
+                        <ul class="nk-block-tools g-3">
+                            <li class="nk-block-tools-opt"><a href="{%url 'integration-create' %}" class="btn btn-primary"><em class="icon ni ni-property-add"></em><span>Create New Integration</span></a></li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .nk-block-between -->
+    </div><!-- .nk-block-head -->
+    
+{% endblock%}
+
+{% block content%}
+<div class="nk-block nk-block-lg">
+    <div class="card card-bordered card-preview">
+        <div class="card-inner">
+            <table class="datatable-init-export nowrap table" data-export-title="Export">
+             
+                <thead>
+                    <tr>
+                        <th>Host Name</th>
+                        
+                        <th>Source</th>
+                        <th>In Use</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for integration in integrations %}
+                    <tr>
+                        <td>{{ integration.host }}</td>
+                        <td>{{ integration.source }}</td>
+                        <td><span class="tb-sub">{% if integration.is_active %}<em class="icon ni ni-check-circle-fill text-success"></em>{% else %} <em class="icon ni ni-cross-circle-fill text-danger"> </em>{% endif %}</span></td>
+                        
+                        <td class="nk-tb-col nk-tb-col-tools">
+                            <ul class="nk-tb-actions gx-1">
+                                <li>
+                                    <div class="drodown">
+                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <ul class="link-list-opt no-bdr">
+                                                <li><a href="{% url 'integration-details' integration.pk %}"><em class="icon ni ni-text-rich"></em><span>Details</span></a></li>
+                                                <li><a href="{% url 'integration-update' integration.pk %}"><em class="icon ni ni-edit"></em><span>Update</span></a></li>
+                                                <li><a href="{% url 'integration-test' integration.pk %}"><em class="icon ni ni-signal"></em><span>Test Connection</span></a></li>
+                                                <li><a data-bs-toggle="modal" data-bs-target="#modalAlertDisable{{integration.id}}" <span>{% if integration.is_active %}<em class="icon ni ni-na "></em>Disable{% else %}<em class="icon ni ni-check-circle"></em>Enable{% endif%}</span></a></li>
+                                                <li><a data-bs-toggle="modal" data-bs-target="#modalAlertDelete{{integration.id}}" class="text-danger"><em class="icon ni ni-trash text-danger"></em><span class='text-danger'>Delete</span></a></li>
+                                             </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr> 
+                    <div class="modal fade" tabindex="-1" id="modalAlertDisable{{ integration.id}}">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body modal-body-lg text-center">
+                                    <div class="nk-modal">
+                                        <em class="nk-modal-icon icon icon-circle icon-circle-xxl {% if sftp.in_use %}ni ni-alert-fill bg-warning {% else %} ni ni-check-circle bg-success {% endif %}"></em>
+                                        <h4 class="nk-modal-title">{% if integration.is_active %}Diasble {% else %} Enable{% endif %} {{ integration.host }}!</h4>
+                                        
+                                        <div class="center">
+                                            <span class='py-2'><a href="{% url 'integration-enable' integration.pk %}" class="btn btn-primary btn-outline" >{% if integration.is_active %}Diasble {% else %} Enable{% endif %}</a></span>
+                                              &nbsp;<span class='py-2'><a data-bs-dismiss="modal" class="btn btn-light">Cancel</a></span>
+                                            </p>
+                                         
+                                        </div>
+                                    </div>
+                                </div><!-- .modal-body -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" tabindex="-1" id="modalAlertDelete{{ integration.id }}">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body modal-body-lg text-center">
+                                    <div class="nk-modal">
+                                        <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-cross bg-danger"></em>
+                                        <h4 class="nk-modal-title">Delete {{ integration.host}}!</h4>
+                                        
+                                        <form method="post" action="{% url 'integration-delete' integration.id %}" >
+                                          {% csrf_token %}
+                                          
+                                          <p>Are you sure that you want to delete this integration?</p><br>
+                                          <div class="center">
+                                            
+                                              <span class='px-2'><input type="submit" class="btn btn-primary btn-outline" value="Delete"></span>
+                                              <span class='py-2'><a data-bs-dismiss="modal" class="btn btn-light">Cancel</a></span>
+                                           
+                                          </form>
+                                        </div>
+                                    </div>
+                                </div><!-- .modal-body -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}               
+                </tbody>
+                   
+            </table>
+        </div>
+    </div><!-- .card-preview -->
+</div> <!-- nk-block -->
+
+{% endblock %}

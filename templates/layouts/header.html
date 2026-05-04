@@ -1,0 +1,64 @@
+{% load static %}
+<div class="nk-main ">
+    <!-- wrap @s -->
+    <div class="nk-wrap ">
+        <!-- main header @s -->
+        <div class="nk-header nk-header-fixed nk-header-fluid is-light">
+        <div class="container-fluid">
+            <div class="nk-header-wrap">
+                <div class="nk-menu-trigger d-xl-none ms-n1">
+                    <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+                </div>
+                <div class="logo-link nk-sidebar-logo">
+                    <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/viclogo.png' %}" alt="logo-dark" height="80" width="100">
+                </div>
+                <div class="nk-header-tools"><form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link"><em class="text-danger icon ni ni-signout"></em><span class="text-danger">Log out</span></button>
+                </form></div>
+                <!-- <div class="nk-header-tools">
+                    <ul class="nk-quick-nav">  
+                        <li class="dropdown user-dropdown">
+                            <a href="#" class="dropdown-toggle me-n1" data-bs-toggle="dropdown">
+                                <div class="user-toggle">
+                                    <div class="user-avatar sm">
+                                        <em class="icon ni ni-user-alt"></em>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-end">
+                                <div class="dropdown-inner user-card-wrap bg-lighter">
+                                    <div class="user-card">
+                                        <div class="user-avatar">
+                                            <span>{{ request.user.first_name|slice:":1" }}{{ request.user.last_name|slice:":1" }}</span>
+                                        </div> 
+                                        <div class="user-info">
+                                            <span class="sub-text">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="dropdown-inner">
+                                    <ul class="link-list">
+                                        <li><a href="{% url 'logout' %}"><em class="text-danger icon ni ni-signout"></em><span class="text-danger">Log out</span></a></li>
+                                    </ul>
+                                </div> -->
+                                <!-- <div class="dropdown-inner">
+                                    <ul class="link-list">
+                                        <li>
+                                            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-link"><em class="text-danger icon ni ni-signout"></em><span class="text-danger">Log out</span></button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div> -->
+                            <!-- </div>
+                        </li>
+                    </ul>
+                </div> --> 
+            </div><!-- .nk-header-wrap -->
+        </div><!-- .container-fluid -->
+    </div>
+        
+        <!-- main header @e -->
